@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TRAIPSE Holdings, LLC</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%234A90E2;stop-opacity:0.1'/%3E%3Cstop offset='100%25' style='stop-color:%232E7D32;stop-opacity:0.1'/%3E%3C/linearGradient%3E%3CradialGradient id='g' cx='50%25' cy='30%25'%3E%3Cstop offset='0%25' style='stop-color:%23F4D03F;stop-opacity:0.8'/%3E%3Cstop offset='70%25' style='stop-color:%23F39C12;stop-opacity:0.3'/%3E%3Cstop offset='100%25' style='stop-color:%23F39C12;stop-opacity:0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='200' cy='200' r='150' fill='url(%23s)' stroke='%232E7D32' stroke-width='2' opacity='0.3'/%3E%3Ccircle cx='200' cy='120' r='25' fill='%23F4D03F' opacity='0.9'/%3E%3Ccircle cx='200' cy='120' r='35' fill='url(%23g)'/%3E%3Cg stroke='%23F39C12' stroke-width='2' opacity='0.7'%3E%3Cline x1='200' y1='85' x2='200' y2='70'/%3E%3Cline x1='200' y1='155' x2='200' y2='170'/%3E%3Cline x1='165' y1='120' x2='150' y2='120'/%3E%3Cline x1='235' y1='120' x2='250' y2='120'/%3E%3C/g%3E%3Cpath d='M 80 240 L 140 160 L 180 200 L 200 180 L 220 200 L 260 160 L 320 240 Z' fill='%232E7D32' opacity='0.8'/%3E%3Cpath d='M 60 240 L 110 180 L 150 215 L 200 165 L 250 215 L 290 180 L 340 240 Z' fill='%2343A047' opacity='0.6'/%3E%3Cpath d='M 60 250 Q 100 245 140 250 T 220 250 T 300 250 T 340 250 L 340 280 L 60 280 Z' fill='%234A90E2' opacity='0.4'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -223,7 +224,7 @@
 
   .hero-acronym {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight: 400;
     font-style: italic;
     color: var(--grey-light);
@@ -285,7 +286,7 @@
   }
 
   .section-label {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--gold-warm);
@@ -303,7 +304,7 @@
   }
 
   .section-text {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     line-height: 1.9;
     color: var(--grey-text);
     max-width: 680px;
@@ -462,7 +463,7 @@
   }
 
   .venture-card p {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     line-height: 1.8;
     color: var(--grey-text);
   }
@@ -490,6 +491,21 @@
   @keyframes pulse {
     0%, 100% { opacity: 0.4; }
     50% { opacity: 1; }
+  }
+
+  .venture-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: var(--green-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .venture-link:hover {
+    color: var(--gold-warm);
   }
 
   /* ── Values Strip ── */
@@ -535,7 +551,7 @@
   }
 
   .value-item p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.7;
     color: rgba(232, 245, 233, 0.7);
     font-weight: 200;
@@ -742,7 +758,7 @@
   <div class="mission-content">
     <div class="reveal">
       <p class="section-label">Our Mission</p>
-      <h2 class="section-title">Building a regenerative future,<br>one venture at a time.</h2>
+      <h2 class="section-title">Building a sustainable future,<br>one venture at a time.</h2>
       <p class="section-text">
         TRAIPSE Holdings is a sustainability-focused holding company rooted in the foothills of Northern Virginia. We develop and operate businesses that honor the land — from eco-tourism and native habitat restoration to regenerative agriculture and community stewardship.
       </p>
@@ -767,7 +783,7 @@
 <section class="ventures" id="ventures">
   <div class="reveal">
     <p class="section-label">Our Ventures</p>
-    <h2 class="section-title">Where sustainability meets experience.</h2>
+    <h2 class="section-title">Rooted in purpose, growing with intention.</h2>
     <p class="section-text">
       Each venture contributes to a closed-loop ecosystem — interconnected businesses that restore land, build community, and create lasting value.
     </p>
@@ -790,6 +806,7 @@
         <span class="dot"></span>
         In Development
       </div>
+      <a href="https://www.instagram.com/traipsecampground/" target="_blank" rel="noopener" class="venture-link">Follow on Instagram →</a>
     </div>
 
     <div class="venture-card reveal">
