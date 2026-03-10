@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRAIPSE Holdings, LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1B5E20;
+    --green-primary: #2E7D32;
+    --green-mid: #43A047;
+    --green-light: #E8F5E9;
+    --gold-bright: #F4D03F;
+    --gold-warm: #F39C12;
+    --blue-primary: #4A90E2;
+    --blue-light: #5DADE2;
+    --grey-text: #5D6D7E;
+    --grey-light: #7F8C8D;
+    --cream: #FAFDF7;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 300;
+    color: var(--grey-text);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── Animated grain overlay ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── Navigation ── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(250, 253, 247, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(46, 125, 50, 0.08);
+    transition: all 0.4s ease;
+  }
+
+  nav.scrolled {
+    padding: 1rem 3rem;
+    box-shadow: 0 2px 30px rgba(46, 125, 50, 0.06);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+  }
+
+  .nav-logo svg {
+    width: 44px;
+    height: 44px;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-logo:hover svg {
+    transform: scale(1.05);
+  }
+
+  .nav-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    color: var(--green-primary);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--grey-text);
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold-warm);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--green-primary);
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .hero-bg .circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.04;
+  }
+
+  .hero-bg .circle-1 {
+    width: 800px;
+    height: 800px;
+    background: var(--green-primary);
+    top: -200px;
+    right: -200px;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .hero-bg .circle-2 {
+    width: 600px;
+    height: 600px;
+    background: var(--gold-warm);
+    bottom: -150px;
+    left: -150px;
+    animation: float 25s ease-in-out infinite reverse;
+  }
+
+  .hero-bg .circle-3 {
+    width: 400px;
+    height: 400px;
+    background: var(--blue-primary);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: float 15s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(30px, -20px); }
+    66% { transform: translate(-20px, 30px); }
+  }
+
+  .hero-logo {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 1s ease-out 0.2s both;
+    filter: drop-shadow(0 4px 20px rgba(46, 125, 50, 0.1));
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    letter-spacing: 12px;
+    color: var(--green-primary);
+    margin-bottom: 0.5rem;
+    animation: fadeUp 1s ease-out 0.4s both;
+  }
+
+  .hero-sub {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    color: var(--grey-light);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    animation: fadeUp 1s ease-out 0.5s both;
+  }
+
+  .hero-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-warm), transparent);
+    margin: 0 auto 2rem;
+    animation: fadeUp 1s ease-out 0.6s both;
+  }
+
+  .hero-acronym {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--grey-light);
+    line-height: 1.8;
+    animation: fadeUp 1s ease-out 0.7s both;
+  }
+
+  .hero-acronym span {
+    color: var(--green-primary);
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: fadeUp 1s ease-out 1s both;
+  }
+
+  .scroll-indicator .mouse {
+    width: 24px;
+    height: 38px;
+    border: 2px solid var(--green-mid);
+    border-radius: 12px;
+    opacity: 0.4;
+    position: relative;
+  }
+
+  .scroll-indicator .mouse::after {
+    content: '';
+    width: 3px;
+    height: 8px;
+    background: var(--green-mid);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollDot 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollDot {
+    0%, 100% { opacity: 0.4; top: 8px; }
+    50% { opacity: 1; top: 18px; }
+  }
+
+  /* ── Section shared ── */
+  section {
+    padding: 7rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-warm);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 400;
+    color: var(--green-deep);
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--grey-text);
+    max-width: 680px;
+  }
+
+  /* ── Mission ── */
+  .mission {
+    position: relative;
+  }
+
+  .mission-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .mission-visual {
+    position: relative;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mission-visual .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid;
+    opacity: 0.15;
+  }
+
+  .ring-1 {
+    width: 320px;
+    height: 320px;
+    border-color: var(--green-primary);
+    animation: spin 60s linear infinite;
+  }
+
+  .ring-2 {
+    width: 240px;
+    height: 240px;
+    border-color: var(--gold-warm);
+    animation: spin 45s linear infinite reverse;
+  }
+
+  .ring-3 {
+    width: 160px;
+    height: 160px;
+    border-color: var(--blue-primary);
+    animation: spin 30s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .mission-visual .icon-sun {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, var(--gold-bright), var(--gold-warm));
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(244, 208, 63, 0.3);
+    z-index: 1;
+  }
+
+  .mission-visual .dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green-mid);
+    opacity: 0.5;
+  }
+
+  .dot-1 { top: 15%; left: 20%; }
+  .dot-2 { top: 30%; right: 10%; }
+  .dot-3 { bottom: 25%; left: 15%; }
+  .dot-4 { bottom: 10%; right: 25%; }
+
+  /* ── Ventures ── */
+  .ventures {
+    text-align: center;
+  }
+
+  .ventures .section-text {
+    margin: 0 auto 4rem;
+    text-align: center;
+  }
+
+  .venture-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .venture-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(46, 125, 50, 0.06);
+    transition: all 0.4s ease;
+    cursor: default;
+  }
+
+  .venture-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green-primary), var(--gold-warm));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .venture-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(46, 125, 50, 0.08);
+    border-color: rgba(46, 125, 50, 0.12);
+  }
+
+  .venture-card:hover::before {
+    opacity: 1;
+  }
+
+  .venture-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .venture-icon.glamping {
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.08), rgba(67, 160, 71, 0.12));
+  }
+
+  .venture-icon.rewild {
+    background: linear-gradient(135deg, rgba(244, 208, 63, 0.1), rgba(243, 156, 18, 0.12));
+  }
+
+  .venture-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--green-deep);
+    margin-bottom: 0.75rem;
+  }
+
+  .venture-card p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--grey-text);
+  }
+
+  .venture-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 1.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--grey-light);
+    font-weight: 600;
+  }
+
+  .venture-status .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold-warm);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ── Values Strip ── */
+  .values-strip {
+    background: var(--green-deep);
+    padding: 5rem 2rem;
+    max-width: 100%;
+    margin: 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .values-strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(67, 160, 71, 0.15) 0%, transparent 70%);
+  }
+
+  .values-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .value-item {
+    text-align: center;
+  }
+
+  .value-item h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--gold-bright);
+    margin-bottom: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .value-item p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(232, 245, 233, 0.7);
+    font-weight: 200;
+  }
+
+  /* ── Contact ── */
+  .contact {
+    text-align: center;
+  }
+
+  .contact .section-text {
+    margin: 0 auto 2.5rem;
+    text-align: center;
+  }
+
+  .contact-email {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--green-primary);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s ease;
+  }
+
+  .contact-email::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--gold-warm);
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+  }
+
+  .contact-email:hover {
+    color: var(--green-deep);
+  }
+
+  .contact-email:hover::after {
+    opacity: 1;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(46, 125, 50, 0.06);
+  }
+
+  footer p {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--grey-light);
+    font-weight: 300;
+  }
+
+  footer .footer-acronym {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--grey-light);
+    opacity: 0.6;
+    margin-top: 0.5rem;
+    letter-spacing: 1px;
+  }
+
+  /* ── Scroll Animations ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-wordmark { display: none; }
+    .nav-links { gap: 1.5rem; }
+    .nav-links a { font-size: 0.7rem; letter-spacing: 1.5px; }
+    .mission-content { grid-template-columns: 1fr; gap: 3rem; }
+    .mission-visual { height: 280px; order: -1; }
+    .venture-cards { grid-template-columns: 1fr; }
+    .values-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero h1 { letter-spacing: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="navSky" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:0.1"/>
+          <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:0.1"/>
+        </linearGradient>
+        <radialGradient id="navSunGlow" cx="50%" cy="30%">
+          <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:0.8"/>
+          <stop offset="70%" style="stop-color:#F39C12;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#F39C12;stop-opacity:0"/>
+        </radialGradient>
+      </defs>
+      <circle cx="200" cy="200" r="150" fill="url(#navSky)" stroke="#2E7D32" stroke-width="2" opacity="0.3"/>
+      <circle cx="200" cy="120" r="25" fill="#F4D03F" opacity="0.9"/>
+      <circle cx="200" cy="120" r="35" fill="url(#navSunGlow)"/>
+      <g stroke="#F39C12" stroke-width="2" opacity="0.7">
+        <line x1="200" y1="85" x2="200" y2="70"/>
+        <line x1="200" y1="155" x2="200" y2="170"/>
+        <line x1="165" y1="120" x2="150" y2="120"/>
+        <line x1="235" y1="120" x2="250" y2="120"/>
+        <line x1="175" y1="95" x2="165" y2="85"/>
+        <line x1="225" y1="145" x2="235" y2="155"/>
+        <line x1="225" y1="95" x2="235" y2="85"/>
+        <line x1="175" y1="145" x2="165" y2="155"/>
+      </g>
+      <circle cx="140" cy="100" r="3" fill="#E8F4F8"/>
+      <circle cx="260" cy="95" r="3" fill="#E8F4F8"/>
+      <circle cx="165" cy="80" r="2" fill="#E8F4F8"/>
+      <circle cx="235" cy="85" r="2" fill="#E8F4F8"/>
+      <circle cx="150" cy="130" r="2" fill="#E8F4F8"/>
+      <path d="M 80 240 L 140 160 L 180 200 L 200 180 L 220 200 L 260 160 L 320 240 Z" fill="#2E7D32" opacity="0.8"/>
+      <path d="M 60 240 L 110 180 L 150 215 L 200 165 L 250 215 L 290 180 L 340 240 Z" fill="#43A047" opacity="0.6"/>
+      <path d="M 60 250 Q 100 245 140 250 T 220 250 T 300 250 T 340 250 L 340 280 L 60 280 Z" fill="#4A90E2" opacity="0.4"/>
+      <path d="M 60 260 Q 100 257 140 260 T 220 260 T 300 260 T 340 260" stroke="#5DADE2" stroke-width="1.5" fill="none" opacity="0.6"/>
+    </svg>
+    <span class="nav-wordmark">TRAIPSE</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#ventures">Ventures</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+  </div>
+
+  <svg class="hero-logo" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="heroSky" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:0.1"/>
+        <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:0.1"/>
+      </linearGradient>
+      <radialGradient id="heroSunGlow" cx="50%" cy="30%">
+        <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:0.8"/>
+        <stop offset="70%" style="stop-color:#F39C12;stop-opacity:0.3"/>
+        <stop offset="100%" style="stop-color:#F39C12;stop-opacity:0"/>
+      </radialGradient>
+    </defs>
+    <circle cx="200" cy="200" r="150" fill="url(#heroSky)" stroke="#2E7D32" stroke-width="2" opacity="0.3"/>
+    <circle cx="200" cy="120" r="25" fill="#F4D03F" opacity="0.9"/>
+    <circle cx="200" cy="120" r="35" fill="url(#heroSunGlow)"/>
+    <g stroke="#F39C12" stroke-width="2" opacity="0.7">
+      <line x1="200" y1="85" x2="200" y2="70"/>
+      <line x1="200" y1="155" x2="200" y2="170"/>
+      <line x1="165" y1="120" x2="150" y2="120"/>
+      <line x1="235" y1="120" x2="250" y2="120"/>
+      <line x1="175" y1="95" x2="165" y2="85"/>
+      <line x1="225" y1="145" x2="235" y2="155"/>
+      <line x1="225" y1="95" x2="235" y2="85"/>
+      <line x1="175" y1="145" x2="165" y2="155"/>
+    </g>
+    <circle cx="140" cy="100" r="3" fill="#E8F4F8"/>
+    <circle cx="260" cy="95" r="3" fill="#E8F4F8"/>
+    <circle cx="165" cy="80" r="2" fill="#E8F4F8"/>
+    <circle cx="235" cy="85" r="2" fill="#E8F4F8"/>
+    <circle cx="150" cy="130" r="2" fill="#E8F4F8"/>
+    <path d="M 80 240 L 140 160 L 180 200 L 200 180 L 220 200 L 260 160 L 320 240 Z" fill="#2E7D32" opacity="0.8"/>
+    <path d="M 60 240 L 110 180 L 150 215 L 200 165 L 250 215 L 290 180 L 340 240 Z" fill="#43A047" opacity="0.6"/>
+    <path d="M 60 250 Q 100 245 140 250 T 220 250 T 300 250 T 340 250 L 340 280 L 60 280 Z" fill="#4A90E2" opacity="0.4"/>
+    <path d="M 60 260 Q 100 257 140 260 T 220 260 T 300 260 T 340 260" stroke="#5DADE2" stroke-width="1.5" fill="none" opacity="0.6"/>
+  </svg>
+
+  <h1>TRAIPSE</h1>
+  <p class="hero-sub">HOLDINGS, LLC</p>
+  <div class="hero-line"></div>
+  <p class="hero-acronym">
+    <span>T</span>rail <span>R</span>everence <span>A</span>nd <span>I</span>ntentional<br>
+    <span>P</span>reservation of <span>S</span>ustainable <span>E</span>nvironments
+  </p>
+
+  <div class="scroll-indicator">
+    <div class="mouse"></div>
+  </div>
+</section>
+
+<!-- Mission -->
+<section class="mission" id="mission">
+  <div class="mission-content">
+    <div class="reveal">
+      <p class="section-label">Our Mission</p>
+      <h2 class="section-title">Building a regenerative future,<br>one venture at a time.</h2>
+      <p class="section-text">
+        TRAIPSE Holdings is a sustainability-focused holding company rooted in the foothills of Northern Virginia. We develop and operate businesses that honor the land — from eco-tourism and native habitat restoration to regenerative agriculture and community stewardship.
+      </p>
+      <p class="section-text" style="margin-top: 1.2rem;">
+        Every venture in our portfolio is designed to prove that conservation and commerce can thrive together.
+      </p>
+    </div>
+    <div class="mission-visual reveal">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="icon-sun"></div>
+      <div class="dot dot-1"></div>
+      <div class="dot dot-2"></div>
+      <div class="dot dot-3"></div>
+      <div class="dot dot-4"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Ventures -->
+<section class="ventures" id="ventures">
+  <div class="reveal">
+    <p class="section-label">Our Ventures</p>
+    <h2 class="section-title">Where sustainability meets experience.</h2>
+    <p class="section-text">
+      Each venture contributes to a closed-loop ecosystem — interconnected businesses that restore land, build community, and create lasting value.
+    </p>
+  </div>
+
+  <div class="venture-cards">
+    <div class="venture-card reveal">
+      <div class="venture-icon glamping">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 22h20L12 2z"/>
+          <path d="M12 22V14"/>
+          <path d="M9 22l3-8 3 8"/>
+        </svg>
+      </div>
+      <h3>TRAIPSE Campground</h3>
+      <p>
+        An eco-glamping destination on 50 acres in Loudoun County, Virginia — nestled along the Appalachian Trail. Thoughtfully designed to immerse guests in nature while treading lightly on the land.
+      </p>
+      <div class="venture-status">
+        <span class="dot"></span>
+        In Development
+      </div>
+    </div>
+
+    <div class="venture-card reveal">
+      <div class="venture-icon rewild">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F39C12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22c-4-3-8-6-8-10a8 8 0 0116 0c0 4-4 7-8 10z"/>
+          <path d="M12 12V8"/>
+          <path d="M9 10l3-4 3 4"/>
+          <path d="M8 16c2-1 4-1 4-1s2 0 4 1"/>
+        </svg>
+      </div>
+      <h3>Native Rewilding &amp; Landscaping</h3>
+      <p>
+        Restoration-focused landscaping services for Northern Virginia — replacing conventional lawns with thriving native ecosystems. Building habitat corridors, one property at a time.
+      </p>
+      <div class="venture-status">
+        <span class="dot"></span>
+        Coming Soon
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Values Strip -->
+<div class="values-strip">
+  <div class="values-inner">
+    <div class="value-item reveal">
+      <h4>Conservation</h4>
+      <p>Every decision is weighed against its impact on the land, water, and ecosystems we're entrusted with.</p>
+    </div>
+    <div class="value-item reveal">
+      <h4>Regeneration</h4>
+      <p>We don't just sustain — we actively restore. Our goal is to leave every acre richer than we found it.</p>
+    </div>
+    <div class="value-item reveal">
+      <h4>Community</h4>
+      <p>Deep roots in Northern Virginia. We build alongside our neighbors, for the benefit of the region we call home.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">Let's build something<br>that lasts.</h2>
+    <p class="section-text">
+      Whether you're interested in partnerships, investment opportunities, or just want to talk about sustainable land use in Northern Virginia — we'd love to hear from you.
+    </p>
+    <a href="mailto:hello@traipseholdings.com" class="contact-email">hello@traipseholdings.com</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2026 TRAIPSE Holdings, LLC &nbsp;&middot;&nbsp; Arlington, Virginia</p>
+  <p class="footer-acronym">Trail Reverence And Intentional Preservation of Sustainable Environments</p>
+</footer>
+
+<script>
+  // Scroll-triggered reveals
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+</script>
+
+</body>
+</html>
