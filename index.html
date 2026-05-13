@@ -1,839 +1,1096 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Traipse Holdings, LLC</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%234A90E2;stop-opacity:0.1'/%3E%3Cstop offset='100%25' style='stop-color:%232E7D32;stop-opacity:0.1'/%3E%3C/linearGradient%3E%3CradialGradient id='g' cx='50%25' cy='30%25'%3E%3Cstop offset='0%25' style='stop-color:%23F4D03F;stop-opacity:0.8'/%3E%3Cstop offset='70%25' style='stop-color:%23F39C12;stop-opacity:0.3'/%3E%3Cstop offset='100%25' style='stop-color:%23F39C12;stop-opacity:0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='200' cy='200' r='150' fill='url(%23s)' stroke='%232E7D32' stroke-width='2' opacity='0.3'/%3E%3Ccircle cx='200' cy='120' r='25' fill='%23F4D03F' opacity='0.9'/%3E%3Ccircle cx='200' cy='120' r='35' fill='url(%23g)'/%3E%3Cg stroke='%23F39C12' stroke-width='2' opacity='0.7'%3E%3Cline x1='200' y1='85' x2='200' y2='70'/%3E%3Cline x1='200' y1='155' x2='200' y2='170'/%3E%3Cline x1='165' y1='120' x2='150' y2='120'/%3E%3Cline x1='235' y1='120' x2='250' y2='120'/%3E%3C/g%3E%3Cpath d='M 80 240 L 140 160 L 180 200 L 200 180 L 220 200 L 260 160 L 320 240 Z' fill='%232E7D32' opacity='0.8'/%3E%3Cpath d='M 60 240 L 110 180 L 150 215 L 200 165 L 250 215 L 290 180 L 340 240 Z' fill='%2343A047' opacity='0.6'/%3E%3Cpath d='M 60 250 Q 100 245 140 250 T 220 250 T 300 250 T 340 250 L 340 280 L 60 280 Z' fill='%234A90E2' opacity='0.4'/%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Traipse Holdings — Site Refresh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --green-deep: #1B5E20;
-    --green-primary: #2E7D32;
-    --green-mid: #43A047;
-    --green-light: #E8F5E9;
-    --gold-bright: #F4D03F;
-    --gold-warm: #F39C12;
-    --blue-primary: #4A90E2;
-    --blue-light: #5DADE2;
-    --grey-text: #5D6D7E;
-    --grey-light: #7F8C8D;
-    --cream: #FAFDF7;
-    --white: #FFFFFF;
+    --buttercream: #F9E267;
+    --freesia:     #F3C12C;
+    --tangerine:   #F88F58;
+    --aqua:        #7BC4C4;
+    --bud:         #79B465;
+    --bud-dark:    #5C8F4B;
+    --forest:      #37413A;
+    --forest-deep: #2A332C;
+    --paper:       #FAF7F0;
+    --soft:        #F2EEE2;
+    --rule:        rgba(55,65,58,0.14);
+    --ink-soft:    #6e7268;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-
   body {
-    font-family: 'Nunito Sans', sans-serif;
-    font-weight: 300;
-    color: var(--grey-text);
-    background: var(--cream);
-    overflow-x: hidden;
+    background: var(--paper);
+    color: var(--forest);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.6;
   }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
 
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
+  /* ───────── Annotation strip (designer's notes) ───────── */
+  .annot {
+    background: var(--forest);
+    color: var(--paper);
+    padding: 28px 5vw;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
-
-  /* ── Navigation ── */
-  nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 1.5rem 3rem;
+  .annot-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    background: rgba(250, 253, 247, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(46, 125, 50, 0.08);
-    transition: all 0.4s ease;
+    align-items: baseline;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    margin-bottom: 18px;
   }
-
-  nav.scrolled {
-    padding: 1rem 3rem;
-    box-shadow: 0 2px 30px rgba(46, 125, 50, 0.06);
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-  }
-
-  .nav-logo svg {
-    width: 44px;
-    height: 44px;
-    transition: transform 0.3s ease;
-  }
-
-  .nav-logo:hover svg {
-    transform: scale(1.05);
-  }
-
-  .nav-wordmark {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 500;
-    letter-spacing: 4px;
-    color: var(--green-primary);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 2px;
+  .annot-header .tag {
+    color: var(--buttercream);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--grey-text);
-    position: relative;
-    transition: color 0.3s ease;
+    font-size: 10px;
   }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--gold-warm);
-    transition: width 0.3s ease;
+  .annot-header .ver {
+    color: rgba(250,247,240,0.55);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 10px;
   }
+  .annot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+  }
+  .annot-grid h4 {
+    color: var(--buttercream);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .annot-grid p { color: rgba(250,247,240,0.78); font-size: 12px; }
+  .annot-grid b { color: white; font-weight: 500; }
 
-  .nav-links a:hover { color: var(--green-primary); }
-  .nav-links a:hover::after { width: 100%; }
+  /* ───────── Nav ───────── */
+  nav.site {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250,247,240,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 5vw;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-brand svg { width: 38px; height: 38px; }
+  .nav-brand .lockup { line-height: 1; }
+  .nav-brand .lockup .t {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.28em;
+    color: var(--forest);
+  }
+  .nav-brand .lockup .s {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    margin-top: 3px;
+  }
+  nav.site ul { display: flex; gap: 30px; list-style: none; }
+  nav.site ul a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--forest);
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 180ms;
+  }
+  nav.site ul a:hover { border-bottom-color: var(--bud); }
 
-  /* ── Hero ── */
+  /* ───────── Hero ───────── */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 6rem 2rem 4rem;
     position: relative;
+    padding: 100px 5vw 140px;
     overflow: hidden;
+    background:
+      radial-gradient(ellipse 80% 60% at 18% 8%, rgba(123,196,196,0.20), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 92% 100%, rgba(248,143,88,0.16), transparent 60%),
+      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(249,226,103,0.10), transparent 70%),
+      var(--paper);
   }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
+  .hero-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: center;
   }
-
-  .hero-bg .circle {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.04;
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--bud-dark);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
   }
-
-  .hero-bg .circle-1 {
-    width: 800px; height: 800px;
-    background: var(--green-primary);
-    top: -200px; right: -200px;
-    animation: float 20s ease-in-out infinite;
+  .hero-eyebrow::before {
+    content: ""; width: 28px; height: 1px; background: var(--bud);
   }
-
-  .hero-bg .circle-2 {
-    width: 600px; height: 600px;
-    background: var(--gold-warm);
-    bottom: -150px; left: -150px;
-    animation: float 25s ease-in-out infinite reverse;
-  }
-
-  .hero-bg .circle-3 {
-    width: 400px; height: 400px;
-    background: var(--blue-primary);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    animation: float 15s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translate(0, 0); }
-    33% { transform: translate(30px, -20px); }
-    66% { transform: translate(-20px, 30px); }
-  }
-
-  .hero-logo {
-    width: 180px;
-    height: 180px;
-    margin-bottom: 2.5rem;
-    animation: fadeUp 1s ease-out 0.2s both;
-    filter: drop-shadow(0 4px 20px rgba(46, 125, 50, 0.1));
-  }
-
   .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    font-weight: 300;
-    letter-spacing: 12px;
-    color: var(--green-primary);
-    margin-bottom: 0.5rem;
-    animation: fadeUp 1s ease-out 0.4s both;
-  }
-
-  .hero-sub {
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 0.85rem;
-    letter-spacing: 3px;
-    color: var(--grey-light);
-    font-weight: 300;
-    margin-bottom: 2rem;
-    animation: fadeUp 1s ease-out 0.5s both;
-  }
-
-  .hero-line {
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-warm), transparent);
-    margin: 0 auto 2rem;
-    animation: fadeUp 1s ease-out 0.6s both;
-  }
-
-  .hero-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-family: 'Fraunces', Georgia, serif;
     font-weight: 400;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    color: var(--forest);
+    margin-bottom: 28px;
+    text-wrap: balance;
+  }
+  .hero h1 em {
     font-style: italic;
-    color: var(--green-deep);
-    margin-bottom: 1rem;
-    animation: fadeUp 1s ease-out 0.7s both;
+    color: var(--bud-dark);
   }
-
-  .hero-tagline-sub {
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 0.9rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--grey-light);
-    font-weight: 300;
-    animation: fadeUp 1s ease-out 0.8s both;
+  .hero .lede {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--forest);
+    max-width: 520px;
+    margin-bottom: 36px;
+    text-wrap: pretty;
   }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .scroll-indicator {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: fadeUp 1s ease-out 1s both;
-  }
-
-  .scroll-indicator .mouse {
-    width: 24px;
-    height: 38px;
-    border: 2px solid var(--green-mid);
-    border-radius: 12px;
-    opacity: 0.4;
-    position: relative;
-  }
-
-  .scroll-indicator .mouse::after {
-    content: '';
-    width: 3px;
-    height: 8px;
-    background: var(--green-mid);
-    border-radius: 2px;
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: scrollDot 2s ease-in-out infinite;
-  }
-
-  @keyframes scrollDot {
-    0%, 100% { opacity: 0.4; top: 8px; }
-    50% { opacity: 1; top: 18px; }
-  }
-
-  /* ── Section shared ── */
-  section {
-    padding: 7rem 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-size: 0.85rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold-warm);
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    font-weight: 400;
-    color: var(--green-deep);
-    line-height: 1.3;
-    margin-bottom: 1.5rem;
-  }
-
-  .section-text {
-    font-size: 1.15rem;
-    line-height: 1.9;
-    color: var(--grey-text);
-    max-width: 680px;
-  }
-
-  /* ── Mission ── */
-  .mission-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-  }
-
-  .mission-visual {
-    position: relative;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .mission-visual .ring {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid;
-    opacity: 0.15;
-  }
-
-  .ring-1 { width: 320px; height: 320px; border-color: var(--green-primary); animation: spin 60s linear infinite; }
-  .ring-2 { width: 240px; height: 240px; border-color: var(--gold-warm); animation: spin 45s linear infinite reverse; }
-  .ring-3 { width: 160px; height: 160px; border-color: var(--blue-primary); animation: spin 30s linear infinite; }
-
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .mission-visual .icon-sun {
-    width: 60px;
-    height: 60px;
-    background: radial-gradient(circle, var(--gold-bright), var(--gold-warm));
-    border-radius: 50%;
-    box-shadow: 0 0 40px rgba(244, 208, 63, 0.3);
-    z-index: 1;
-  }
-
-  .mission-visual .dot {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--green-mid);
-    opacity: 0.5;
-  }
-
-  .dot-1 { top: 15%; left: 20%; }
-  .dot-2 { top: 30%; right: 10%; }
-  .dot-3 { bottom: 25%; left: 15%; }
-  .dot-4 { bottom: 10%; right: 25%; }
-
-  /* ── Ventures ── */
-  .ventures { text-align: center; }
-
-  .ventures .section-text {
-    margin: 0 auto 4rem;
-    text-align: center;
-  }
-
-  .venture-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-
-  .venture-card {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 3rem 2.5rem;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(46, 125, 50, 0.06);
-    transition: all 0.4s ease;
-    cursor: default;
-  }
-
-  .venture-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 3px;
-    background: linear-gradient(90deg, var(--green-primary), var(--gold-warm));
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  .venture-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(46, 125, 50, 0.08);
-    border-color: rgba(46, 125, 50, 0.12);
-  }
-
-  .venture-card:hover::before { opacity: 1; }
-
-  .venture-icon {
-    width: 56px; height: 56px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .venture-icon.glamping { background: linear-gradient(135deg, rgba(46, 125, 50, 0.08), rgba(67, 160, 71, 0.12)); }
-  .venture-icon.rewild { background: linear-gradient(135deg, rgba(244, 208, 63, 0.1), rgba(243, 156, 18, 0.12)); }
-
-  .venture-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
+  .hero .lede b { font-weight: 500; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    font-size: 13px;
     font-weight: 500;
-    color: var(--green-deep);
-    margin-bottom: 0.75rem;
-  }
-
-  .venture-card p {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--grey-text);
-  }
-
-  .venture-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 1.5rem;
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--grey-light);
-    font-weight: 600;
-  }
-
-  .venture-status .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--gold-warm);
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-  }
-
-  .venture-link {
-    display: inline-block;
-    margin-top: 1rem;
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: var(--green-primary);
+    letter-spacing: 0.04em;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: transform 160ms, background 160ms;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.primary { background: var(--forest); color: var(--paper); }
+  .btn.primary:hover { background: var(--forest-deep); }
+  .btn.ghost { background: transparent; color: var(--forest); border: 1px solid var(--rule); }
+  .btn.ghost:hover { border-color: var(--forest); }
+  .btn .arr { display: inline-block; transition: transform 200ms; }
+  .btn:hover .arr { transform: translateX(3px); }
+
+  .hero-art {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    max-width: 540px;
+    justify-self: end;
+    width: 100%;
+  }
+  .hero-art svg { width: 100%; height: 100%; }
+  .hero-meta {
+    position: absolute;
+    bottom: -22px;
+    left: -8px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--bud); }
+
+  /* ───────── Sections (shared) ───────── */
+  section.block { padding: 120px 5vw; max-width: 1280px; margin: 0 auto; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 24px;
+  }
+  .eyebrow .num { color: var(--bud-dark); }
+  .eyebrow::before {
+    content: ""; width: 28px; height: 1px; background: var(--rule);
+  }
+  h2.disp {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--forest);
+    max-width: 18ch;
+    margin-bottom: 32px;
+    text-wrap: balance;
+  }
+  h2.disp em { font-style: italic; color: var(--bud-dark); }
+  .copy {
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 62ch;
+    color: var(--forest);
+    text-wrap: pretty;
+  }
+  .copy + .copy { margin-top: 18px; }
+
+  /* ───────── Mission ───────── */
+  .mission { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+  .mission .left { position: sticky; top: 120px; }
+  .mission .stamp {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.9;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .mission .stamp b { color: var(--forest); }
+
+  /* ───────── Pillars (Tend / Sustain / Thrive) ───────── */
+  .pillars {
+    margin-top: 72px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .pillar {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 36px 40px;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 40px;
+    align-items: center;
+    transition: transform 220ms, box-shadow 220ms, border-color 220ms;
+  }
+  .pillar:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(55,65,58,0.08); border-color: var(--c); }
+  .pillar::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--c);
+  }
+  .pillar.tend    { --c: var(--bud); }
+  .pillar.sustain { --c: var(--aqua); }
+  .pillar.thrive  { --c: var(--tangerine); }
+  .pillar .glyph {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    color: var(--c);
+  }
+  .pillar .glyph .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    padding-top: 6px;
+  }
+  .pillar .glyph .letter {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(80px, 9vw, 124px);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+  }
+  .pillar h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: 30px;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+    color: var(--forest);
+  }
+  .pillar p { font-size: 16px; color: var(--forest); line-height: 1.65; max-width: 56ch; }
+
+  /* ───────── Ventures ───────── */
+  .ventures { display: grid; gap: 24px; margin-top: 56px; }
+  .venture {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 56px;
+    align-items: center;
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    padding: 40px;
+    transition: border-color 220ms;
+  }
+  .venture:hover { border-color: var(--bud); }
+  .venture .badge {
+    width: 100%; aspect-ratio: 1 / 1;
+    background: var(--soft);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px;
+  }
+  .venture.dark .badge { background: var(--forest); }
+  .venture .badge svg { width: 100%; height: 100%; }
+  .venture .status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bud-dark);
+    margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px;
+    background: rgba(121,180,101,0.12);
+    border-radius: 999px;
+  }
+  .venture .status.soon { color: var(--tangerine); background: rgba(248,143,88,0.12); }
+  .venture h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .venture p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--forest);
+    margin-bottom: 22px;
+    max-width: 62ch;
+  }
+  .venture .links { display: flex; gap: 18px; flex-wrap: wrap; }
+  .venture .links a {
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--forest);
+    border-bottom: 1px solid var(--forest);
+    padding-bottom: 2px;
+    transition: color 160ms, border-color 160ms;
+  }
+  .venture .links a:hover { color: var(--bud-dark); border-bottom-color: var(--bud-dark); }
+
+  /* ───────── Instagram section ───────── */
+  .ig-block {
+    background: var(--soft);
+    padding: 120px 5vw;
+    margin: 0;
+    max-width: none;
+    background-image:
+      radial-gradient(ellipse 50% 50% at 10% 10%, rgba(123,196,196,0.20), transparent 60%),
+      radial-gradient(ellipse 50% 50% at 90% 90%, rgba(249,226,103,0.18), transparent 60%);
+  }
+  .ig-inner { max-width: 1280px; margin: 0 auto; }
+  .ig-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 24px; margin-bottom: 48px; }
+  .ig-account-tabs {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    margin-top: 18px;
+  }
+  .ig-tab {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: white;
+    border: 1px solid var(--rule);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--forest);
+    text-decoration: none;
+    transition: background 160ms;
+  }
+  .ig-tab:hover { background: var(--paper); }
+  .ig-tab .ig-icon {
+    width: 16px; height: 16px; border-radius: 4px;
+    background: linear-gradient(135deg, #f9ce34, #ee2a7b 40%, #6228d7);
+    display: inline-block;
+  }
+  .ig-tab .handle { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-soft); letter-spacing: 0.04em; }
+
+  .ig-account { margin-bottom: 56px; }
+  .ig-account-label {
+    display: flex; align-items: center; gap: 14px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 22px;
+  }
+  .ig-account-label .av {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--bud);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .ig-account-label .av.cmp { box-shadow: 0 0 0 2px var(--tangerine); }
+  .ig-account-label .av svg { width: 100%; height: 100%; }
+  .ig-account-label .who { flex: 1; }
+  .ig-account-label .name { font-weight: 600; font-size: 15px; color: var(--forest); }
+  .ig-account-label .handle { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-soft); }
+  .ig-account-label .follow {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--forest);
+    color: var(--paper);
+    text-decoration: none;
+  }
+  .ig-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .ig-post {
+    aspect-ratio: 1 / 1;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid var(--rule);
+  }
+  .ig-post image-slot {
+    --is-bg: var(--soft);
+    --is-border: transparent;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .ig-post .caption {
+    position: absolute;
+    left: 10px; right: 10px; bottom: 10px;
+    padding: 6px 8px;
+    background: rgba(55,65,58,0.78);
+    color: var(--paper);
+    font-size: 11px;
+    line-height: 1.35;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 160ms;
+  }
+  .ig-post:hover .caption { opacity: 1; }
+  a.ig-post { text-decoration: none; color: inherit; display: block; }
+  a.ig-post img { transition: transform 400ms ease; }
+  a.ig-post:hover img { transform: scale(1.04); }
+  .ig-post .meta {
+    position: absolute; top: 8px; left: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(250,247,240,0.92);
+    color: var(--forest);
+    padding: 4px 7px;
+    border-radius: 4px;
+    pointer-events: none;
   }
 
-  .venture-link:hover { color: var(--gold-warm); }
-
-  /* ── Values Strip ── */
-  .values-strip {
-    background: var(--green-deep);
-    padding: 5rem 2rem;
-    max-width: 100%;
-    margin: 0;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+  /* ───────── Contact ───────── */
+  .contact-block {
+    background: var(--forest);
+    color: var(--paper);
+    padding: 120px 5vw;
     position: relative;
     overflow: hidden;
   }
-
-  .values-strip::before {
-    content: '';
+  .contact-block::before {
+    content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 30% 50%, rgba(67, 160, 71, 0.15) 0%, transparent 70%);
+    background:
+      radial-gradient(ellipse 50% 40% at 90% 10%, rgba(123,196,196,0.18), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 10% 100%, rgba(248,143,88,0.16), transparent 60%);
+    pointer-events: none;
   }
-
-  .values-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-    position: relative;
-    z-index: 1;
+  .contact-inner { max-width: 1280px; margin: 0 auto; position: relative; }
+  .contact-block .eyebrow { color: var(--buttercream); }
+  .contact-block .eyebrow .num { color: var(--buttercream); }
+  .contact-block .eyebrow::before { background: rgba(249,226,103,0.4); }
+  .contact-block h2.disp { color: var(--paper); max-width: 22ch; }
+  .contact-block h2.disp em { color: var(--buttercream); }
+  .contact-block .copy { color: rgba(250,247,240,0.82); }
+  .contact-cta {
+    margin-top: 40px;
+    display: flex; gap: 18px; flex-wrap: wrap; align-items: center;
   }
-
-  .value-item { text-align: center; }
-
-  .value-item h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: var(--gold-bright);
-    margin-bottom: 0.75rem;
-    letter-spacing: 2px;
-  }
-
-  .value-item p {
-    font-size: 1rem;
-    line-height: 1.8;
-    color: rgba(232, 245, 233, 0.75);
-    font-weight: 200;
-  }
-
-  /* ── Contact ── */
-  .contact { text-align: center; }
-
-  .contact .section-text {
-    margin: 0 auto 2.5rem;
-    text-align: center;
-  }
-
-  .contact-email {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    color: var(--green-primary);
+  .email-pill {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 16px 24px;
+    background: var(--buttercream);
+    color: var(--forest);
+    border-radius: 999px;
+    font-weight: 500;
     text-decoration: none;
-    position: relative;
-    padding-bottom: 4px;
-    transition: color 0.3s ease;
+    font-size: 16px;
   }
+  .email-pill:hover { background: var(--freesia); }
 
-  .contact-email::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%; height: 1px;
-    background: var(--gold-warm);
-    opacity: 0.4;
-    transition: opacity 0.3s ease;
+  /* ───────── Footer ───────── */
+  footer.site {
+    background: var(--forest-deep);
+    color: rgba(250,247,240,0.65);
+    padding: 48px 5vw;
+    display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
   }
+  footer.site .brand { display: flex; align-items: center; gap: 10px; color: var(--paper); }
+  footer.site .brand svg { width: 28px; height: 28px; }
+  footer.site .tag { font-style: italic; font-family: 'Fraunces', serif; font-size: 14px; color: var(--buttercream); letter-spacing: 0; }
 
-  .contact-email:hover { color: var(--green-deep); }
-  .contact-email:hover::after { opacity: 1; }
-
-  /* ── Footer ── */
-  footer {
-    padding: 3rem 2rem;
-    text-align: center;
-    border-top: 1px solid rgba(46, 125, 50, 0.06);
+  /* ───────── Responsive ───────── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-art { justify-self: start; max-width: 360px; }
+    .mission { grid-template-columns: 1fr; gap: 40px; }
+    .mission .left { position: static; }
+    .pillars { grid-template-columns: 1fr; }
+    .pillar { grid-template-columns: 1fr; gap: 4px; padding: 28px; }
+    .pillar .glyph { margin-bottom: 6px; }
+    .pillar .glyph .letter { font-size: 72px; }
+    .venture { grid-template-columns: 1fr; gap: 24px; padding: 28px; }
+    .venture .badge { max-width: 260px; }
+    .ig-grid { grid-template-columns: repeat(2, 1fr); }
+    nav.site ul { gap: 16px; }
+    nav.site ul a { font-size: 12px; }
+    section.block { padding: 80px 5vw; }
   }
-
-  footer p {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    color: var(--grey-light);
-    font-weight: 300;
-  }
-
-  footer .footer-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.9rem;
-    font-style: italic;
-    color: var(--grey-light);
-    opacity: 0.6;
-    margin-top: 0.5rem;
-    letter-spacing: 1px;
-  }
-
-  /* ── Scroll Animations ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-wordmark { display: none; }
-    .nav-links { gap: 1.5rem; }
-    .nav-links a { font-size: 0.7rem; letter-spacing: 1.5px; }
-    .mission-content { grid-template-columns: 1fr; gap: 3rem; }
-    .mission-visual { height: 280px; order: -1; }
-    .venture-cards { grid-template-columns: 1fr; }
-    .values-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-    .hero h1 { letter-spacing: 6px; }
+  @media (max-width: 540px) {
+    .ig-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav-brand .lockup .s { display: none; }
   }
 </style>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav id="navbar">
-  <a href="#" class="nav-logo">
-    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="navSky" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:0.1"/>
-          <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:0.1"/>
-        </linearGradient>
-        <radialGradient id="navSunGlow" cx="50%" cy="30%">
-          <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:0.8"/>
-          <stop offset="70%" style="stop-color:#F39C12;stop-opacity:0.3"/>
-          <stop offset="100%" style="stop-color:#F39C12;stop-opacity:0"/>
-        </radialGradient>
-      </defs>
-      <circle cx="200" cy="200" r="150" fill="url(#navSky)" stroke="#2E7D32" stroke-width="2" opacity="0.3"/>
-      <circle cx="200" cy="120" r="25" fill="#F4D03F" opacity="0.9"/>
-      <circle cx="200" cy="120" r="35" fill="url(#navSunGlow)"/>
-      <g stroke="#F39C12" stroke-width="2" opacity="0.7">
-        <line x1="200" y1="85" x2="200" y2="70"/>
-        <line x1="200" y1="155" x2="200" y2="170"/>
-        <line x1="165" y1="120" x2="150" y2="120"/>
-        <line x1="235" y1="120" x2="250" y2="120"/>
-        <line x1="175" y1="95" x2="165" y2="85"/>
-        <line x1="225" y1="145" x2="235" y2="155"/>
-        <line x1="225" y1="95" x2="235" y2="85"/>
-        <line x1="175" y1="145" x2="165" y2="155"/>
-      </g>
-      <circle cx="140" cy="100" r="3" fill="#E8F4F8"/>
-      <circle cx="260" cy="95" r="3" fill="#E8F4F8"/>
-      <circle cx="165" cy="80" r="2" fill="#E8F4F8"/>
-      <circle cx="235" cy="85" r="2" fill="#E8F4F8"/>
-      <circle cx="150" cy="130" r="2" fill="#E8F4F8"/>
-      <path d="M 80 240 L 140 160 L 180 200 L 200 180 L 220 200 L 260 160 L 320 240 Z" fill="#2E7D32" opacity="0.8"/>
-      <path d="M 60 240 L 110 180 L 150 215 L 200 165 L 250 215 L 290 180 L 340 240 Z" fill="#43A047" opacity="0.6"/>
-      <path d="M 60 250 Q 100 245 140 250 T 220 250 T 300 250 T 340 250 L 340 280 L 60 280 Z" fill="#4A90E2" opacity="0.4"/>
-      <path d="M 60 260 Q 100 257 140 260 T 220 260 T 300 260 T 340 260" stroke="#5DADE2" stroke-width="1.5" fill="none" opacity="0.6"/>
-    </svg>
-    <span class="nav-wordmark">Traipse</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#mission">Mission</a></li>
-    <li><a href="#ventures">Ventures</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-bg">
-    <div class="circle circle-1"></div>
-    <div class="circle circle-2"></div>
-    <div class="circle circle-3"></div>
+<!-- ─────────────────────── DESIGNER'S ANALYSIS ─────────────────────── -->
+<div class="annot">
+  <div class="annot-header">
+    <span class="tag">⌁ Site refresh · designer's notes</span>
+    <span class="ver">Traipse Holdings · home page mockup · v1</span>
   </div>
-
-  <svg class="hero-logo" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="heroSky" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:0.1"/>
-        <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:0.1"/>
-      </linearGradient>
-      <radialGradient id="heroSunGlow" cx="50%" cy="30%">
-        <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:0.8"/>
-        <stop offset="70%" style="stop-color:#F39C12;stop-opacity:0.3"/>
-        <stop offset="100%" style="stop-color:#F39C12;stop-opacity:0"/>
-      </radialGradient>
-    </defs>
-    <circle cx="200" cy="200" r="150" fill="url(#heroSky)" stroke="#2E7D32" stroke-width="2" opacity="0.3"/>
-    <circle cx="200" cy="120" r="25" fill="#F4D03F" opacity="0.9"/>
-    <circle cx="200" cy="120" r="35" fill="url(#heroSunGlow)"/>
-    <g stroke="#F39C12" stroke-width="2" opacity="0.7">
-      <line x1="200" y1="85" x2="200" y2="70"/>
-      <line x1="200" y1="155" x2="200" y2="170"/>
-      <line x1="165" y1="120" x2="150" y2="120"/>
-      <line x1="235" y1="120" x2="250" y2="120"/>
-      <line x1="175" y1="95" x2="165" y2="85"/>
-      <line x1="225" y1="145" x2="235" y2="155"/>
-      <line x1="225" y1="95" x2="235" y2="85"/>
-      <line x1="175" y1="145" x2="165" y2="155"/>
-    </g>
-    <circle cx="140" cy="100" r="3" fill="#E8F4F8"/>
-    <circle cx="260" cy="95" r="3" fill="#E8F4F8"/>
-    <circle cx="165" cy="80" r="2" fill="#E8F4F8"/>
-    <circle cx="235" cy="85" r="2" fill="#E8F4F8"/>
-    <circle cx="150" cy="130" r="2" fill="#E8F4F8"/>
-    <path d="M 80 240 L 140 160 L 180 200 L 200 180 L 220 200 L 260 160 L 320 240 Z" fill="#2E7D32" opacity="0.8"/>
-    <path d="M 60 240 L 110 180 L 150 215 L 200 165 L 250 215 L 290 180 L 340 240 Z" fill="#43A047" opacity="0.6"/>
-    <path d="M 60 250 Q 100 245 140 250 T 220 250 T 300 250 T 340 250 L 340 280 L 60 280 Z" fill="#4A90E2" opacity="0.4"/>
-    <path d="M 60 260 Q 100 257 140 260 T 220 260 T 300 260 T 340 260" stroke="#5DADE2" stroke-width="1.5" fill="none" opacity="0.6"/>
-  </svg>
-
-  <h1>TRAIPSE</h1>
-  <p class="hero-sub">HOLDINGS, LLC</p>
-  <div class="hero-line"></div>
-  <p class="hero-tagline">The earth is our business.</p>
-  <p class="hero-tagline-sub">Invested in the wild.</p>
-
-  <div class="scroll-indicator">
-    <div class="mouse"></div>
-  </div>
-</section>
-
-<!-- Mission -->
-<section class="mission" id="mission">
-  <div class="mission-content">
-    <div class="reveal">
-      <p class="section-label">Our Mission</p>
-      <h2 class="section-title">Where awe becomes stewardship.</h2>
-      <p class="section-text">
-        There is a moment — hands in the dirt, boots on a trail, eyes on an uninterrupted sky — when something ancient and necessary stirs. You remember, without being told, that you belong here. That the wild, teeming, life-giving world around you is not separate from you. It is you.
-      </p>
-      <p class="section-text" style="margin-top: 1.2rem;">
-        Traipse Holdings was founded to cultivate that moment, and to build enterprises worthy of it. From eco-glamping and sustainability education to native habitat restoration and regenerative land use, every venture in our portfolio exists to nurture the natural wonder that inspires people to protect what they love — for themselves, and for every generation yet to wander these places.
-      </p>
-      <p class="section-text" style="margin-top: 1.2rem;">
-        Rooted in Northern Virginia. Invested in the habitats we all depend on.
-      </p>
+  <div class="annot-grid">
+    <div>
+      <h4>What I observed</h4>
+      <p>Strong, poetic copy already lives on the site — the brief is to <b>refresh the visual frame</b>, not rewrite. Current layout is functional but flat: small type, no logo, no imagery, no proof of life.</p>
     </div>
-    <div class="mission-visual reveal">
-      <div class="ring ring-1"></div>
-      <div class="ring ring-2"></div>
-      <div class="ring ring-3"></div>
-      <div class="icon-sun"></div>
-      <div class="dot dot-1"></div>
-      <div class="dot dot-2"></div>
-      <div class="dot dot-3"></div>
-      <div class="dot dot-4"></div>
+    <div>
+      <h4>What I changed</h4>
+      <p>Brought in the <b>v2 Holdings mark</b> (nav, hero, footer) and the <b>Campground mark</b> in the venture card. Mapped every accent to the <b>Pantone palette</b> — Bud Green for action, Tangerine for "coming soon," Buttercream on dark, Aqua for ambient depth.</p>
     </div>
-  </div>
-</section>
-
-<!-- Ventures -->
-<section class="ventures" id="ventures">
-  <div class="reveal">
-    <p class="section-label">Our Ventures</p>
-    <h2 class="section-title">Rooted in purpose, growing with intention.</h2>
-    <p class="section-text">
-      Each venture contributes to a closed-loop ecosystem — interconnected enterprises that restore habitat, immerse people in nature, and create lasting value for the land and the communities that depend on it.
-    </p>
-  </div>
-
-  <div class="venture-cards">
-    <div class="venture-card reveal">
-      <div class="venture-icon glamping">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 22h20L12 2z"/>
-          <path d="M12 22V14"/>
-          <path d="M9 22l3-8 3 8"/>
-        </svg>
-      </div>
-      <h3>Traipse Campground</h3>
-      <p>
-        Immersive eco-glamping destinations designed to bring people into deep contact with the natural world. Each location is named for the landscape it inhabits — beginning with Traipse Campground Blue Ridge in Northern Virginia. Thoughtfully built, lightly treaded, unforgettable.
-      </p>
-      <div class="venture-status">
-        <span class="dot"></span>
-        In Development
-      </div>
-      <a href="https://www.instagram.com/traipsecampground/" target="_blank" rel="noopener" class="venture-link">Follow Traipse Campground on Instagram →</a>
+    <div>
+      <h4>What's new</h4>
+      <p>An <b>Instagram section</b> with separate rows for <code>@traipseholdings</code> and <code>@traipsecampground</code> — eight image slots you can drag screenshots into. Plus a refreshed hero, three pillar cards, and a contact block with depth.</p>
     </div>
-
-    <div class="venture-card reveal">
-      <div class="venture-icon rewild">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F39C12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22c-4-3-8-6-8-10a8 8 0 0116 0c0 4-4 7-8 10z"/>
-          <path d="M12 12V8"/>
-          <path d="M9 10l3-4 3 4"/>
-          <path d="M8 16c2-1 4-1 4-1s2 0 4 1"/>
-        </svg>
-      </div>
-      <h3>Native Rewilding &amp; Landscaping</h3>
-      <p>
-        Restoration-focused landscaping that replaces conventional lawns with thriving native ecosystems — building habitat for the bugs, the bees, the birds, and every living thing that depends on a healthy, teeming earth. One property at a time.
-      </p>
-      <div class="venture-status">
-        <span class="dot"></span>
-        Coming Soon
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Values Strip -->
-<div class="values-strip">
-  <div class="values-inner">
-    <div class="value-item reveal">
-      <h4>Tend.</h4>
-      <p>Ancient peoples knew the earth must be cared for — not conquered. Every venture we build is an act of tending: to the land, to the creatures that inhabit it, and to the human need for wildness.</p>
-    </div>
-    <div class="value-item reveal">
-      <h4>Sustain.</h4>
-      <p>We operate by a simple principle borrowed from the oldest wisdom: take only what you need, and leave the rest richer than you found it. For this generation, and every one to come.</p>
-    </div>
-    <div class="value-item reveal">
-      <h4>Thrive.</h4>
-      <p>Conservation and commerce are not opposites. When we invest in habitat — in wild, teeming, life-sustaining places — everything thrives. The land. The community. The business.</p>
+    <div>
+      <h4>To do / decide</h4>
+      <p>Drop your latest IG screenshots into the eight slots below. Consider: real Instagram embed via Meta Graph API later, hero photography vs. the SVG mark, and whether <b>"Blue Ridge"</b> deserves its own destination page.</p>
     </div>
   </div>
 </div>
 
-<!-- Contact -->
-<section class="contact" id="contact">
-  <div class="reveal">
-    <p class="section-label">Get in Touch</p>
-    <h2 class="section-title">Let's build something<br>the earth deserves.</h2>
-    <p class="section-text">
-      Whether you're a landowner, investor, aligned enterprise, or simply someone who feels this in your bones — we'd love to hear from you. Traipse Holdings is actively seeking partnerships, land opportunities, and collaborators who share our belief that the earth is worth investing in.
-    </p>
-    <br/>
-    <a href="mailto:hello@traipseholdings.com" class="contact-email">hello@traipseholdings.com</a>
-    <br/><br/>
-    <a href="https://www.instagram.com/traipseholdings/" target="_blank" rel="noopener" class="venture-link" style="font-size:1rem;">Follow our journey on Instagram →</a>
+<!-- ─────────────────────── NAV ─────────────────────── -->
+<nav class="site" data-screen-label="00 Nav">
+  <a href="#top" class="nav-brand" aria-label="Traipse Holdings home">
+    <!-- Compact Holdings mark -->
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <radialGradient id="nav-sky" cx="50%" cy="40%" r="70%">
+          <stop offset="0%" stop-color="#FCEFCE"/>
+          <stop offset="100%" stop-color="#F2EEE2"/>
+        </radialGradient>
+        <radialGradient id="nav-sun" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#F9E267"/>
+          <stop offset="70%" stop-color="#F3C12C"/>
+          <stop offset="100%" stop-color="#E8AC1C"/>
+        </radialGradient>
+        <clipPath id="nav-clip"><circle cx="200" cy="200" r="194"/></clipPath>
+      </defs>
+      <circle cx="200" cy="200" r="194" fill="url(#nav-sky)" stroke="#37413A" stroke-width="6"/>
+      <circle cx="200" cy="155" r="38" fill="url(#nav-sun)"/>
+      <g clip-path="url(#nav-clip)">
+        <path d="M 30 290 L 110 175 L 160 235 L 200 195 L 240 235 L 290 175 L 370 290 Z" fill="#9AC889"/>
+        <path d="M 60 290 L 130 185 L 200 290 Z" fill="#79B465"/>
+        <path d="M 200 290 L 270 185 L 340 290 Z" fill="#79B465"/>
+        <path d="M 150 290 L 200 210 L 250 290 Z" fill="#5C8F4B"/>
+        <rect x="0" y="290" width="400" height="40" fill="#7BC4C4"/>
+        <rect x="0" y="328" width="400" height="80" fill="#F2EEE2"/>
+      </g>
+    </svg>
+    <div class="lockup">
+      <div class="t">TRAIPSE</div>
+      <div class="s">HOLDINGS, LLC</div>
+    </div>
+  </a>
+  <ul>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#ventures">Ventures</a></li>
+    <li><a href="#instagram">Field Notes</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ─────────────────────── HERO ─────────────────────── -->
+<section class="hero" id="top" data-screen-label="01 Hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Northern Virginia · Est. 2026</div>
+      <h1>The earth is <em>our&nbsp;business.</em></h1>
+      <p class="lede"><b>Traipse Holdings</b> builds enterprises that nurture the wild, teeming world — eco-glamping, native rewilding, and the habitats we all depend on.</p>
+      <div class="hero-ctas">
+        <a class="btn primary" href="#ventures">See our ventures <span class="arr">→</span></a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <!-- Full Holdings primary logo -->
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-label="Traipse Holdings logo">
+        <defs>
+          <radialGradient id="hero-sky" cx="50%" cy="40%" r="70%">
+            <stop offset="0%" stop-color="#FCEFCE"/>
+            <stop offset="100%" stop-color="#F2EEE2"/>
+          </radialGradient>
+          <radialGradient id="hero-sun" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#F9E267"/>
+            <stop offset="70%" stop-color="#F3C12C"/>
+            <stop offset="100%" stop-color="#E8AC1C"/>
+          </radialGradient>
+          <radialGradient id="hero-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#F9E267" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#F9E267" stop-opacity="0"/>
+          </radialGradient>
+          <clipPath id="hero-clip"><circle cx="200" cy="200" r="194"/></clipPath>
+        </defs>
+        <circle cx="200" cy="200" r="194" fill="url(#hero-sky)" stroke="#37413A" stroke-width="2.5"/>
+        <circle cx="200" cy="135" r="60" fill="url(#hero-glow)"/>
+        <g stroke="#F88F58" stroke-width="2.5" stroke-linecap="round">
+          <line x1="200" y1="78" x2="200" y2="92"/>
+          <line x1="200" y1="178" x2="200" y2="192"/>
+          <line x1="143" y1="135" x2="157" y2="135"/>
+          <line x1="243" y1="135" x2="257" y2="135"/>
+          <line x1="160" y1="95" x2="170" y2="105"/>
+          <line x1="230" y1="165" x2="240" y2="175"/>
+          <line x1="160" y1="175" x2="170" y2="165"/>
+          <line x1="230" y1="105" x2="240" y2="95"/>
+        </g>
+        <circle cx="200" cy="135" r="26" fill="url(#hero-sun)"/>
+        <path d="M 30 270 L 110 165 L 160 220 L 200 180 L 240 220 L 290 165 L 370 270 Z" fill="#9AC889"/>
+        <path d="M 60 270 L 130 175 L 200 270 Z" fill="#79B465"/>
+        <path d="M 200 270 L 270 175 L 340 270 Z" fill="#79B465"/>
+        <path d="M 150 270 L 200 195 L 250 270 Z" fill="#5C8F4B"/>
+        <path d="M 130 175 L 200 270 L 165 270 Z" fill="#5C8F4B" opacity="0.5"/>
+        <path d="M 270 175 L 305 270 L 340 270 Z" fill="#5C8F4B" opacity="0.5"/>
+        <g clip-path="url(#hero-clip)">
+          <rect x="0" y="270" width="400" height="32" fill="#7BC4C4"/>
+          <path d="M 0 282 Q 60 276, 130 282 T 230 282 T 330 282 T 400 282" fill="none" stroke="#5FA9A9" stroke-width="1.2" opacity="0.7"/>
+          <path d="M 0 292 Q 70 287, 150 292 T 270 292 T 400 292" fill="none" stroke="#5FA9A9" stroke-width="1.2" opacity="0.5"/>
+          <rect x="0" y="302" width="400" height="92" fill="#F2EEE2"/>
+        </g>
+        <text x="200" y="345" font-family="Inter, sans-serif" font-size="38" font-weight="500" letter-spacing="6" text-anchor="middle" fill="#79B465">TRAIPSE</text>
+        <text x="200" y="370" font-family="Inter, sans-serif" font-size="13" font-weight="500" letter-spacing="5" text-anchor="middle" fill="#37413A">HOLDINGS</text>
+      </svg>
+      <div class="hero-meta"><span class="dot"></span> Invested in the wild</div>
+    </div>
   </div>
 </section>
 
-<!-- Footer -->
-<footer>
-  <p>&copy; 2026 Traipse Holdings, LLC &nbsp;&middot;&nbsp; Arlington, Virginia</p>
-  <p class="footer-tagline">The earth is our business.</p>
+<!-- ─────────────────────── MISSION ─────────────────────── -->
+<section class="block" id="mission" data-screen-label="02 Mission">
+  <div class="mission">
+    <div class="left">
+      <div class="eyebrow"><span class="num">01</span> Our Mission</div>
+      <h2 class="disp">Where awe becomes <em>stewardship.</em></h2>
+      <div class="stamp">
+        <b>Rooted</b> in Northern Virginia<br/>
+        <b>Invested</b> in the wild<br/>
+        <b>Building</b> a closed-loop portfolio
+      </div>
+    </div>
+    <div>
+      <p class="copy">There is a moment — hands in the dirt, boots on a trail, eyes on an uninterrupted sky — when something ancient and necessary stirs. You remember, without being told, that you belong here. That the wild, teeming, life-giving world around you is not separate from you. It <em>is</em> you.</p>
+      <p class="copy">Traipse Holdings was founded to cultivate that moment, and to build enterprises worthy of it. From eco-glamping and sustainability education to native habitat restoration and regenerative land use, every venture in our portfolio exists to nurture the natural wonder that inspires people to protect what they love — for themselves, and for every generation yet to wander these places.</p>
+    </div>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar tend">
+      <div class="glyph"><span class="num">01</span><span class="letter">T</span></div>
+      <div>
+        <h3>Tend.</h3>
+        <p>Ancient peoples knew the earth must be cared for — not conquered. Every venture we build is an act of tending: to the land, to the creatures that inhabit it, and to the human need for wildness.</p>
+      </div>
+    </div>
+    <div class="pillar sustain">
+      <div class="glyph"><span class="num">02</span><span class="letter">S</span></div>
+      <div>
+        <h3>Sustain.</h3>
+        <p>Take only what you need, and leave the rest richer than you found it. For this generation, and every one to come.</p>
+      </div>
+    </div>
+    <div class="pillar thrive">
+      <div class="glyph"><span class="num">03</span><span class="letter">T</span></div>
+      <div>
+        <h3>Thrive.</h3>
+        <p>Conservation and commerce are not opposites. When we invest in habitat, everything thrives — the land, the community, and the business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────── VENTURES ─────────────────────── -->
+<section class="block" id="ventures" data-screen-label="03 Ventures">
+  <div class="eyebrow"><span class="num">02</span> Our Ventures</div>
+  <h2 class="disp">Rooted in purpose, growing with <em>intention.</em></h2>
+  <p class="copy">Each venture contributes to a closed-loop ecosystem — interconnected enterprises that restore habitat, immerse people in nature, and create lasting value for the land and the communities that depend on it.</p>
+
+  <div class="ventures">
+    <!-- Venture 1: Campground -->
+    <article class="venture dark">
+      <div class="badge">
+        <!-- Campground reverse mark -->
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-label="Traipse Campground logo">
+          <defs>
+            <radialGradient id="v-sky" cx="50%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#4A5650"/>
+              <stop offset="100%" stop-color="#2A332C"/>
+            </radialGradient>
+            <radialGradient id="v-fire" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#F9E267" stop-opacity="0.9"/>
+              <stop offset="60%" stop-color="#F88F58" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#F88F58" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="200" cy="200" r="194" fill="url(#v-sky)" stroke="#F9E267" stroke-width="2.5"/>
+          <g fill="#F9E267">
+            <circle cx="125" cy="100" r="2.5"/><circle cx="148" cy="80" r="1.8"/>
+            <circle cx="252" cy="78" r="1.8"/><circle cx="278" cy="105" r="2.2"/>
+            <circle cx="295" cy="135" r="1.5"/><circle cx="135" cy="138" r="1.5"/>
+            <circle cx="115" cy="125" r="1.8"/>
+          </g>
+          <circle cx="200" cy="110" r="22" fill="#F9E267"/>
+          <circle cx="208" cy="108" r="20" fill="#37413A"/>
+          <path d="M 30 290 L 110 195 L 175 270 L 200 245 L 225 270 L 290 195 L 370 290 Z" fill="#79B465" opacity="0.55"/>
+          <path d="M 50 290 L 130 195 L 210 290 Z" fill="#79B465"/>
+          <path d="M 190 290 L 270 195 L 350 290 Z" fill="#79B465"/>
+          <path d="M 130 195 L 210 290 L 170 290 Z" fill="#5C8F4B" opacity="0.7"/>
+          <path d="M 270 195 L 350 290 L 310 290 Z" fill="#5C8F4B" opacity="0.7"/>
+          <g fill="#5C8F4B">
+            <path d="M 155 270 L 150 280 L 160 280 Z M 155 275 L 148 285 L 162 285 Z M 153 290 L 157 290 L 157 275 L 153 275 Z"/>
+            <path d="M 245 270 L 240 280 L 250 280 Z M 245 275 L 238 285 L 252 285 Z M 243 290 L 247 290 L 247 275 L 243 275 Z"/>
+          </g>
+          <path d="M 200 232 L 145 290 L 255 290 Z" fill="#79B465"/>
+          <path d="M 200 232 L 200 290 L 255 290 Z" fill="#5C8F4B"/>
+          <line x1="200" y1="232" x2="200" y2="290" stroke="#FAF7F0" stroke-width="1.5"/>
+          <path d="M 200 252 L 184 290 L 216 290 Z" fill="#37413A"/>
+          <line x1="200" y1="232" x2="200" y2="210" stroke="#FAF7F0" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M 200 212 L 218 217 L 200 222 Z" fill="#F88F58"/>
+          <ellipse cx="200" cy="300" rx="125" ry="10" fill="#79B465" opacity="0.35"/>
+          <circle cx="200" cy="305" r="26" fill="url(#v-fire)"/>
+          <line x1="190" y1="312" x2="210" y2="306" stroke="#FAF7F0" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="210" y1="312" x2="190" y2="306" stroke="#FAF7F0" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M 200 308 Q 192 296, 197 286 Q 200 280, 200 274 Q 200 280, 203 286 Q 208 296, 200 308 Z" fill="#F88F58"/>
+          <path d="M 200 308 Q 195 300, 198 292 Q 200 288, 200 284 Q 200 288, 202 292 Q 205 300, 200 308 Z" fill="#F9E267"/>
+          <text x="200" y="343" font-family="Inter, sans-serif" font-size="32" font-weight="500" letter-spacing="6" text-anchor="middle" fill="#F9E267">TRAIPSE</text>
+          <text x="200" y="363" font-family="Inter, sans-serif" font-size="11" font-weight="500" letter-spacing="5" text-anchor="middle" fill="#FAF7F0">CAMPGROUND</text>
+          <text x="200" y="378" font-family="Inter, sans-serif" font-size="7" font-weight="400" letter-spacing="1.5" text-anchor="middle" fill="rgba(250,247,240,0.65)">LOUDOUN COUNTY, VA</text>
+        </svg>
+      </div>
+      <div>
+        <span class="status soon">● In Development</span>
+        <h3>Traipse Campground</h3>
+        <p>Immersive eco-glamping destinations designed to bring people into deep contact with the natural world. Each location is named for the landscape it inhabits — beginning with <b>Traipse Campground Blue Ridge</b> in Northern Virginia. Thoughtfully built, lightly treaded, unforgettable.</p>
+        <div class="links">
+          <a href="https://www.instagram.com/traipsecampground/" target="_blank" rel="noopener">Follow on Instagram →</a>
+          <a href="#contact">Join the waitlist →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Venture 2: Native Rewilding -->
+    <article class="venture">
+      <div class="badge" style="background: linear-gradient(135deg, #7BC4C4 0%, #79B465 100%); padding: 0;">
+        <!-- Native Rewilding placeholder mark -->
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-label="Native Rewilding placeholder mark">
+          <defs>
+            <pattern id="stripe-rw" patternUnits="userSpaceOnUse" width="14" height="14" patternTransform="rotate(45)">
+              <line x1="0" y="0" x2="0" y2="14" stroke="rgba(55,65,58,0.06)" stroke-width="6"/>
+            </pattern>
+          </defs>
+          <rect width="400" height="400" fill="url(#stripe-rw)"/>
+          <g transform="translate(200 175)">
+            <!-- stylized native plant icon -->
+            <path d="M 0 80 L 0 -10" stroke="#37413A" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 0 30 Q -30 10, -45 -10 Q -25 -5, 0 10" fill="#5C8F4B"/>
+            <path d="M 0 30 Q 30 10, 45 -10 Q 25 -5, 0 10" fill="#79B465"/>
+            <path d="M 0 5 Q -22 -10, -35 -30 Q -18 -22, 0 -10" fill="#79B465"/>
+            <path d="M 0 5 Q 22 -10, 35 -30 Q 18 -22, 0 -10" fill="#5C8F4B"/>
+            <circle cx="0" cy="-20" r="9" fill="#F3C12C"/>
+            <circle cx="0" cy="-20" r="4" fill="#F88F58"/>
+          </g>
+          <text x="200" y="280" font-family="JetBrains Mono, monospace" font-size="12" letter-spacing="3" text-anchor="middle" fill="#37413A">NATIVE · REWILDING</text>
+          <text x="200" y="300" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2" text-anchor="middle" fill="rgba(55,65,58,0.55)">[ MARK · IN PROGRESS ]</text>
+        </svg>
+      </div>
+      <div>
+        <span class="status soon">● Coming Soon</span>
+        <h3>Native Rewilding<br/>&amp; Landscaping</h3>
+        <p>Restoration-focused landscaping that replaces conventional lawns with thriving native ecosystems — building habitat for the bugs, the bees, the birds, and every living thing that depends on a healthy, teeming earth. One property at a time.</p>
+        <div class="links">
+          <a href="#contact">Inquire about a consultation →</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ─────────────────────── INSTAGRAM / FIELD NOTES ─────────────────────── -->
+<div class="ig-block" id="instagram" data-screen-label="04 Instagram">
+  <div class="ig-inner">
+    <div class="ig-head">
+      <div>
+        <div class="eyebrow"><span class="num">03</span> Field Notes</div>
+        <h2 class="disp">Latest from the <em>trail.</em></h2>
+        <p class="copy" style="max-width: 56ch;">Follow along as we tend, build, and explore — auto-updating posts from <b>@traipsecampground</b> on Instagram.</p>
+      </div>
+      <div class="ig-account-tabs">
+        <a class="ig-tab" href="https://www.instagram.com/traipsecampground/" target="_blank" rel="noopener">
+          <span class="ig-icon"></span>
+          <span>@traipsecampground</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Account: Traipse Campground -->
+    <div class="ig-account" id="ig-account-campground">
+      <div class="ig-account-label">
+        <div class="av cmp">
+          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="200" cy="200" r="200" fill="#E9F2F2"/>
+            <circle cx="200" cy="110" r="22" fill="#F9E267"/>
+            <circle cx="208" cy="108" r="20" fill="#E9F2F2"/>
+            <path d="M 50 290 L 130 195 L 210 290 Z" fill="#79B465"/>
+            <path d="M 190 290 L 270 195 L 350 290 Z" fill="#79B465"/>
+            <path d="M 200 232 L 155 290 L 245 290 Z" fill="#79B465"/>
+            <line x1="200" y1="232" x2="200" y2="290" stroke="#37413A" stroke-width="3"/>
+            <ellipse cx="200" cy="300" rx="120" ry="14" fill="#F88F58" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="who">
+          <div class="name">Traipse Campground</div>
+          <div class="handle">@traipsecampground</div>
+        </div>
+        <a href="https://www.instagram.com/traipsecampground/" target="_blank" rel="noopener" class="follow">Follow →</a>
+      </div>
+      <div class="ig-grid">
+        <div class="ig-post">
+          <image-slot id="ig-c-1" shape="rect" placeholder="@traipsecampground · post 1"></image-slot>
+        </div>
+        <div class="ig-post">
+          <image-slot id="ig-c-2" shape="rect" placeholder="@traipsecampground · post 2"></image-slot>
+        </div>
+        <div class="ig-post">
+          <image-slot id="ig-c-3" shape="rect" placeholder="@traipsecampground · post 3"></image-slot>
+        </div>
+        <div class="ig-post">
+          <image-slot id="ig-c-4" shape="rect" placeholder="@traipsecampground · post 4"></image-slot>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────── CONTACT ─────────────────────── -->
+<section class="contact-block" id="contact" data-screen-label="05 Contact">
+  <div class="contact-inner">
+    <div class="eyebrow"><span class="num">04</span> Get in touch</div>
+    <h2 class="disp">Let's build something the <em>earth deserves.</em></h2>
+    <p class="copy" style="max-width: 64ch;">Whether you're a landowner, investor, aligned enterprise, or simply someone who feels this in your bones — we'd love to hear from you. Traipse Holdings is actively seeking partnerships, land opportunities, and collaborators who share our belief that the earth is worth investing in.</p>
+    <div class="contact-cta">
+      <a class="email-pill" href="/cdn-cgi/l/email-protection#f098959c9c9fb084829199808395989f9c94999e9783de939f9d">
+        <span><span class="__cf_email__" data-cfemail="f199949d9d9eb185839098818294999e9d95989f9682df929e9c">[email&#160;protected]</span></span>
+        <span class="arr">→</span>
+      </a>
+      <a class="btn ghost" style="color: var(--paper); border-color: rgba(250,247,240,0.3);" href="https://www.instagram.com/traipseholdings/" target="_blank" rel="noopener">Follow on Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────── FOOTER ─────────────────────── -->
+<footer class="site">
+  <div class="brand">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="200" cy="200" r="194" fill="#37413A" stroke="#F9E267" stroke-width="8"/>
+      <circle cx="200" cy="155" r="38" fill="#F9E267"/>
+      <path d="M 60 290 L 130 185 L 200 290 Z" fill="#79B465"/>
+      <path d="M 200 290 L 270 185 L 340 290 Z" fill="#79B465"/>
+      <rect x="0" y="290" width="400" height="40" fill="#7BC4C4"/>
+    </svg>
+    <span>TRAIPSE HOLDINGS, LLC</span>
+  </div>
+  <span class="tag">The earth is our business.</span>
+  <span>© 2026 · Arlington, Virginia</span>
 </footer>
 
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="image-slot.js"></script>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     INSTAGRAM LIVE FEED INTEGRATION
+     ════════════════════════════════════════════════════════════════════
+     Two options — fill in whichever you choose. If both are empty, the
+     page falls back to the manual drag-and-drop image slots above.
+
+     ┌─ OPTION A · Behold.so widget (RECOMMENDED for GitHub Pages) ────┐
+     │ 1. Sign up free at https://behold.so                            │
+     │ 2. Create one widget per account, connect each Instagram account│
+     │ 3. Copy the feed ID and paste below                             │
+     │ No backend, no tokens to manage, refreshes automatically.       │
+     └─────────────────────────────────────────────────────────────────┘
+
+     ┌─ OPTION B · Your own backend ──────────────────────────────────┐
+     │ Build a serverless endpoint (Vercel / Netlify / Cloudflare)    │
+     │ that calls graph.instagram.com/me/media with your stored token │
+     │ and returns JSON: [{ media_url, permalink, caption, timestamp }]│
+     │ See setup notes at the bottom of this script.                  │
+     └─────────────────────────────────────────────────────────────────┘
+═══════════════════════════════════════════════════════════════════════ -->
 <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 100);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
+const IG_CONFIG = {
+  campground: {
+    beholdId: '',          // OPTION A
+    apiUrl:   '',          // OPTION B
+    profileUrl: 'https://www.instagram.com/traipsecampground/'
+  },
+  // How many posts to show
+  postsPerAccount: 4
+};
 
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 40);
+// ─── Renderer ────────────────────────────────────────────────────────
+function renderIgPosts(gridEl, posts, profileUrl) {
+  if (!posts || !posts.length) return;
+  gridEl.innerHTML = '';
+  posts.slice(0, IG_CONFIG.postsPerAccount).forEach(p => {
+    const a = document.createElement('a');
+    a.className = 'ig-post ig-live';
+    a.href = p.permalink || profileUrl;
+    a.target = '_blank';
+    a.rel = 'noopener';
+
+    const img = document.createElement('img');
+    img.src = p.media_url || p.thumbnail_url;
+    img.alt = p.caption ? p.caption.slice(0, 80) : 'Instagram post';
+    img.loading = 'lazy';
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+    a.appendChild(img);
+
+    if (p.timestamp) {
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      const d = new Date(p.timestamp);
+      meta.textContent = d.toLocaleString('en-US', { month: 'short', day: '2-digit' });
+      a.appendChild(meta);
+    }
+    if (p.caption) {
+      const cap = document.createElement('div');
+      cap.className = 'caption';
+      cap.textContent = p.caption.length > 110 ? p.caption.slice(0, 110) + '…' : p.caption;
+      a.appendChild(cap);
+    }
+    gridEl.appendChild(a);
   });
-</script>
+}
 
+// ─── Loaders ─────────────────────────────────────────────────────────
+async function loadFromApi(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('API ' + r.status);
+  return await r.json();
+}
+
+function loadFromBehold(feedId, gridEl, profileUrl) {
+  // Behold.so renders into its own embed element; we wrap it in our grid.
+  // See https://behold.so/docs for full customization.
+  gridEl.innerHTML = `<behold-widget feed-id="${feedId}" style="grid-column: 1 / -1;"></behold-widget>`;
+  if (!document.getElementById('behold-script')) {
+    const s = document.createElement('script');
+    s.id = 'behold-script';
+    s.src = 'https://w.behold.so/widget.js';
+    s.type = 'module';
+    document.head.appendChild(s);
+  }
+}
+
+async function hydrateAccount(accountKey, gridSelector) {
+  const cfg = IG_CONFIG[accountKey];
+  const gridEl = document.querySelector(gridSelector);
+  if (!gridEl) return;
+
+  try {
+    if (cfg.beholdId) {
+      loadFromBehold(cfg.beholdId, gridEl, cfg.profileUrl);
+    } else if (cfg.apiUrl) {
+      const posts = await loadFromApi(cfg.apiUrl);
+      renderIgPosts(gridEl, posts, cfg.profileUrl);
+    }
+    // else: leave manual image-slot fallback in place
+  } catch (err) {
+    console.warn('[Instagram]', accountKey, 'failed to load —', err.message,
+                 '— falling back to manual slots');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  hydrateAccount('campground', '#ig-account-campground .ig-grid');
+});
+
+/* ════════════════════════════════════════════════════════════════════
+   BACKEND SETUP REFERENCE (Option B)
+   ════════════════════════════════════════════════════════════════════
+   Example: Vercel serverless function at /api/instagram/holdings.js
+
+     export default async function handler(req, res) {
+       const token = process.env.IG_HOLDINGS_TOKEN; // stored as env var
+       const fields = 'id,caption,media_type,media_url,thumbnail_url,permalink,timestamp';
+       const url = `https://graph.instagram.com/me/media?fields=${fields}&access_token=${token}`;
+       const r = await fetch(url);
+       const data = await r.json();
+       res.setHeader('Cache-Control', 's-maxage=600'); // cache 10 minutes
+       res.json(data.data || []);
+     }
+
+   Token setup:
+   1. https://developers.facebook.com → create app (type: Consumer)
+   2. Add "Instagram Basic Display" product
+   3. Add your Instagram account as a test user, accept invite from Instagram app
+   4. Generate a short-lived token, exchange for a long-lived token (60 days)
+   5. Set up a refresh cron (token can be refreshed before it expires)
+
+   Repeat for /api/instagram/campground with a separate token.
+═══════════════════════════════════════════════════════════════════════ */
+</script>
 </body>
 </html>
