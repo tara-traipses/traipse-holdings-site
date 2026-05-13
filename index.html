@@ -36,53 +36,6 @@
   a { color: inherit; }
   img { display: block; max-width: 100%; }
 
-  /* ───────── Annotation strip (designer's notes) ───────── */
-  .annot {
-    background: var(--forest);
-    color: var(--paper);
-    padding: 28px 5vw;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    line-height: 1.7;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .annot-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-    margin-bottom: 18px;
-  }
-  .annot-header .tag {
-    color: var(--buttercream);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    font-size: 10px;
-  }
-  .annot-header .ver {
-    color: rgba(250,247,240,0.55);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-size: 10px;
-  }
-  .annot-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 22px;
-  }
-  .annot-grid h4 {
-    color: var(--buttercream);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .annot-grid p { color: rgba(250,247,240,0.78); font-size: 12px; }
-  .annot-grid b { color: white; font-weight: 500; }
-
   /* ───────── Nav ───────── */
   nav.site {
     position: sticky; top: 0; z-index: 50;
@@ -588,32 +541,6 @@
 </head>
 <body>
 
-<!-- ─────────────────────── DESIGNER'S ANALYSIS ─────────────────────── -->
-<div class="annot">
-  <div class="annot-header">
-    <span class="tag">⌁ Site refresh · designer's notes</span>
-    <span class="ver">Traipse Holdings · home page mockup · v1</span>
-  </div>
-  <div class="annot-grid">
-    <div>
-      <h4>What I observed</h4>
-      <p>Strong, poetic copy already lives on the site — the brief is to <b>refresh the visual frame</b>, not rewrite. Current layout is functional but flat: small type, no logo, no imagery, no proof of life.</p>
-    </div>
-    <div>
-      <h4>What I changed</h4>
-      <p>Brought in the <b>v2 Holdings mark</b> (nav, hero, footer) and the <b>Campground mark</b> in the venture card. Mapped every accent to the <b>Pantone palette</b> — Bud Green for action, Tangerine for "coming soon," Buttercream on dark, Aqua for ambient depth.</p>
-    </div>
-    <div>
-      <h4>What's new</h4>
-      <p>An <b>Instagram section</b> with separate rows for <code>@traipseholdings</code> and <code>@traipsecampground</code> — eight image slots you can drag screenshots into. Plus a refreshed hero, three pillar cards, and a contact block with depth.</p>
-    </div>
-    <div>
-      <h4>To do / decide</h4>
-      <p>Drop your latest IG screenshots into the eight slots below. Consider: real Instagram embed via Meta Graph API later, hero photography vs. the SVG mark, and whether <b>"Blue Ridge"</b> deserves its own destination page.</p>
-    </div>
-  </div>
-</div>
-
 <!-- ─────────────────────── NAV ─────────────────────── -->
 <nav class="site" data-screen-label="00 Nav">
   <a href="#top" class="nav-brand" aria-label="Traipse Holdings home">
@@ -981,7 +908,7 @@
 <script>
 const IG_CONFIG = {
   campground: {
-    beholdId: '',          // OPTION A
+    beholdId: '2ySNlo6kYYJfaeVZNnan',          // OPTION A
     apiUrl:   '',          // OPTION B
     profileUrl: 'https://www.instagram.com/traipsecampground/'
   },
